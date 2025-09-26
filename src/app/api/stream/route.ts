@@ -45,8 +45,14 @@ export async function GET(req: NextRequest) {
       const id = clientId++;
       clients.push({ id, controller });
 
-      // Remove client on disconnect
+      // Heartbeat: send a ping every 25 seconds
+      const ping = () => controller.enqueue(`data: {"ping":true}\n\n`);
+      const interval = setInterval(ping, 25000);
+      ping(); // send first ping immediately
+
+      // Remove client and clear interval on disconnect
       req.signal.addEventListener("abort", () => {
+        clearInterval(interval);
         clients = clients.filter(c => c.id !== id);
       });
     },
