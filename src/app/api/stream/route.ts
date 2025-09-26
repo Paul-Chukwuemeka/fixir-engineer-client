@@ -1,34 +1,3 @@
-// import { NextRequest } from "next/server";
-// import { send } from "process";
-
-// type Client = {
-//   id: number;
-//   controller: ReadableStreamDefaultController;
-// };
-
-// const clients: any[] = [];
-
-// export async function GET(req: NextRequest){
-//     return new Response(
-//         new ReadableStream({
-//             start(controller){
-//                 const encoder = new TextEncoder();
-//                 const send = (data: any)=> {
-//                     controller.enqueue(encoder.encode(`data: ${JSON.stringify(data)}\n\n`))
-//                 }
-
-//                 const client = {send};
-//                 clients.push(client)
-//             }
-
-//             const interval = setInterval(()=>{
-//                 send({ping : true})
-//             },25000);
-
-//         })
-//     )
-// }
-
 import { NextRequest } from "next/server";
 
 type Client = {
