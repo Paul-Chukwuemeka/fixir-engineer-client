@@ -31,7 +31,7 @@ export default function DashboardPage() {
     });
     try {
       const data = await axios.get("/api/notion-table");
-      setData(data.data.results);
+      setData(data.data.results.slice().reverse());
       setLoading(false);
     } catch (error) {
       console.log(error);
